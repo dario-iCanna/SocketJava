@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,12 +14,25 @@ public class Main {
         System.out.println("client partito");
         Socket s = new Socket("localhost",3000);
         BufferedReader in = new BufferedReader(new InputStreamReader((s.getInputStream())));
-        DataOutputStream out = new DataOutputStream(s.getOutputStream());
-        Scanner input = new Scanner(System.in);
-        System.out.println("inserisci stringa");
-        out.writeBytes(""+ input.next() + '\n');
-        String stringaRicevuta = in.readLine();
-        System.out.println("la string ricevuta e' " + stringaRicevuta);
+            DataOutputStream out = new DataOutputStream(s.getOutputStream());
+        boolean connessione = true;
+        while(connessione){
+            
+            Scanner input = new Scanner(System.in);
+            System.out.println("inserisci stringa");
+            String parola = input.next();
+            out.writeBytes(""+ parola + '\n');
+            if(!parola.equals("!")){
+                String stringaRicevuta = in.readLine();
+                System.out.println("la string ricevuta e' " + stringaRicevuta);
+            }
+            else{
+                System.out.println("Connessione chiusa");
+                connessione = false;
+            }
+            
+        }
+        
         s.close();
     }
 }
