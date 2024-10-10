@@ -14,7 +14,7 @@ public class Main {
         System.out.println("client partito");
         Socket s = new Socket("localhost",3000);
         BufferedReader in = new BufferedReader(new InputStreamReader((s.getInputStream())));
-            DataOutputStream out = new DataOutputStream(s.getOutputStream());
+        DataOutputStream out = new DataOutputStream(s.getOutputStream());
         boolean connessione = true;
         while(connessione){
             
