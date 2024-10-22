@@ -19,10 +19,21 @@ public class Main {
         while(connessione){
             
             Scanner input = new Scanner(System.in);
-            System.out.println("inserisci stringa");
-            String parola = input.next();
-            out.writeBytes(""+ parola + '\n');
-            if(!parola.equals("!")){
+            String parola;
+            do{
+                System.out.println("inserisci comando: 1.Maiuscolo, 2.Minuscolo, 3.Ribaltare, 4.Contare Caratteri, 0.Uscire");
+                parola = input.next();
+            }while(!parola.equals("1") &&!parola.equals("2")&&!parola.equals("3")&&!parola.equals("4")&&!parola.equals("0"));
+            if(parola.equals("0")){
+                out.writeBytes("!\n");
+            }
+            else{
+                out.writeBytes(""+ parola + '\n');
+            }
+            if(!parola.equals("0")){
+                System.out.println("Inserisci stringa");
+                parola = input.next();
+                out.writeBytes("" + parola +'\n');
                 String stringaRicevuta = in.readLine();
                 System.out.println("la string ricevuta e' " + stringaRicevuta);
             }

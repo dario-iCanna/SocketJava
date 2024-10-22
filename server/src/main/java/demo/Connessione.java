@@ -23,8 +23,35 @@ public class Connessione extends Thread{
             
             String stringaRicevuta = in.readLine();
             if(!stringaRicevuta.equals("!")){
-                System.out.println("la string ricevuta e' " + stringaRicevuta);
-                out.writeBytes(stringaRicevuta.toUpperCase() + '\n');
+
+                switch(stringaRicevuta){
+                    case "1":
+                        stringaRicevuta = in.readLine();
+                        System.out.println("la string ricevuta e' " + stringaRicevuta);
+                        out.writeBytes(stringaRicevuta.toUpperCase() + '\n');
+                    break;
+                    case "2":
+                        stringaRicevuta = in.readLine();
+                        System.out.println("la string ricevuta e' " + stringaRicevuta);
+                        out.writeBytes(stringaRicevuta.toLowerCase() + '\n');
+                    break;
+                    case "3":
+                        stringaRicevuta = in.readLine();
+                        String nuovStr = "";
+                        System.out.println("la string ricevuta e' " + stringaRicevuta);
+                        for(int i = stringaRicevuta.length()-1; i>=0;i--){
+                            char l=stringaRicevuta.charAt(i);
+                            nuovStr += l;
+                        }
+                        out.writeBytes(nuovStr + '\n');
+                    break;
+                    case "4":
+                        stringaRicevuta = in.readLine();
+                        System.out.println("la string ricevuta e' " + stringaRicevuta);
+                        out.writeBytes(""+stringaRicevuta.length() + '\n');
+                    break;
+                }
+                
             }
             else{
                 System.out.println("Connessione chiusa");
