@@ -39,6 +39,7 @@ public class Main {
                     System.out.println("Bravo hai indovinato in " + tent + " tentativi");
                     out.writeBytes("" + tent + '\n');
                     int size = Integer.parseInt(in.readLine());
+                    System.out.println("--------CLASSIFICA--------");
                     for(int i = 0; i < size; i++){
                         System.out.println(in.readLine());
                     }

@@ -31,7 +31,6 @@ public class Connessione extends Thread {
                 String stringaRicevuta = in.readLine();
                 try {
                     int n = Integer.parseInt(stringaRicevuta);
-                    System.out.println(dati.getLivelli().get(ind));
                     if (n != dati.getLivelli().get(ind)) {
                         if (n < dati.getLivelli().get(ind)) {
                             out.writeBytes("<\n");
@@ -43,7 +42,15 @@ public class Connessione extends Thread {
                         if (ind == dati.getLivelli().size() - 1) {
                             dati.getClassifica().add(new ArrayList<String>());
                         }
-                        dati.getClassifica().get(ind).add("" + nome + in.readLine());
+                        dati.getClassifica().get(ind).add(in.readLine() + " Tentativi - " + nome);
+                        for(int i = 0; i < dati.getClassifica().get(ind).size()-1; i++){
+                            if(dati.getClassifica().get(ind).get(i).charAt(0) > dati.getClassifica().get(ind).get(i + 1).charAt(0)){
+                                String f = dati.getClassifica().get(ind).get(i);
+                                dati.getClassifica().get(ind).set(i, dati.getClassifica().get(ind).get(i + 1));
+                                dati.getClassifica().get(ind).set(i+1, f);
+
+                            }
+                        }
                         out.writeBytes("" + dati.getClassifica().get(ind).size() + '\n');
                         for(int i = 0; i < dati.getClassifica().get(ind).size(); i++){
                             out.writeBytes(dati.getClassifica().get(ind).get(i)+ '\n');
