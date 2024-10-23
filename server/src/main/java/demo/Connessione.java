@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Connessione extends Thread {
@@ -39,11 +40,10 @@ public class Connessione extends Thread {
                         }
                     } else {
                         out.writeBytes("=\n");
-                        if (ind > dati.getLivelli().size() - 1) {
-                            Random r = new Random();
-                            dati.getLivelli().add(r.nextInt(100));
+                        if (ind == dati.getLivelli().size() - 1) {
+                            dati.getClassifica().add(new ArrayList<String>());
                         }
-                        dati.getClassifica().get(ind).add("" + nome + 3);
+                        dati.getClassifica().get(ind).add("" + nome + in.readLine());
                         out.writeBytes("" + dati.getClassifica().get(ind).size() + '\n');
                         for(int i = 0; i < dati.getClassifica().get(ind).size(); i++){
                             out.writeBytes(dati.getClassifica().get(ind).get(i)+ '\n');

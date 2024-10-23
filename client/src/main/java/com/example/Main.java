@@ -37,6 +37,7 @@ public class Main {
                     break;
                 case "=":
                     System.out.println("Bravo hai indovinato in " + tent + " tentativi");
+                    out.writeBytes("" + tent + '\n');
                     int size = Integer.parseInt(in.readLine());
                     for(int i = 0; i < size; i++){
                         System.out.println(in.readLine());
