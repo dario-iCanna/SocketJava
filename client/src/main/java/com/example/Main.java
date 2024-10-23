@@ -23,7 +23,7 @@ public class Main {
 
         while (connessione) {
             String numero;
-            System.out.println("inserisci un numero");
+            System.out.println("inserisci un numero fra 0 e 100 compresi");
             numero = input.nextLine();
             out.writeBytes("" + numero + '\n');
             tent++;

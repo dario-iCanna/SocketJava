@@ -31,6 +31,9 @@ public class Connessione extends Thread {
                 String stringaRicevuta = in.readLine();
                 try {
                     int n = Integer.parseInt(stringaRicevuta);
+                    if(n < 0 || n > 100){
+                        throw new Exception();
+                    }
                     if (n != dati.getLivelli().get(ind)) {
                         if (n < dati.getLivelli().get(ind)) {
                             out.writeBytes("<\n");
