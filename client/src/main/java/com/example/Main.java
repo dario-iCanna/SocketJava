@@ -12,38 +12,51 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws UnknownHostException, IOException {
         System.out.println("client partito");
-        Socket s = new Socket("localhost",3000);
+        Socket s = new Socket("localhost", 3000);
         BufferedReader in = new BufferedReader(new InputStreamReader((s.getInputStream())));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
         boolean connessione = true;
-        while(connessione){
-            
-            Scanner input = new Scanner(System.in);
-            String parola;
-            do{
-                System.out.println("inserisci comando: 1.Maiuscolo, 2.Minuscolo, 3.Ribaltare, 4.Contare Caratteri, 0.Uscire");
-                parola = input.next();
-            }while(!parola.equals("1") &&!parola.equals("2")&&!parola.equals("3")&&!parola.equals("4")&&!parola.equals("0"));
-            if(parola.equals("0")){
-                out.writeBytes("!\n");
+        int tent = 0, livello = 0;
+        Scanner input = new Scanner(System.in);
+        System.out.println("inserisci nome");
+        out.writeBytes("" + input.nextLine() + '\n');
+
+        while (connessione) {
+            String numero;
+            System.out.println("inserisci un numero");
+            numero = input.nextLine();
+            out.writeBytes("" + numero + '\n');
+            tent++;
+            String risposta = in.readLine();
+            switch (risposta) {
+                case "<":
+                    System.out.println("numero Troppo piccolo");
+                    break;
+                case ">":
+                    System.out.println("numero Troppo grande");
+                    break;
+                case "=":
+                    System.out.println("Bravo hai indovinato in " + tent + " tentativi");
+                    int size = Integer.parseInt(in.readLine());
+                    for(int i = 0; i < size; i++){
+                        System.out.println(in.readLine());
+                    }
+                    System.out.println("Fare una nuova partita? S/n");
+                    char r = input.next().charAt(0);
+                    if (r == 'S' || r == 's') {
+                        tent = 0;
+                        livello++;
+                        out.writeBytes("S\n");
+                    } else {
+                        connessione = false;
+                    }
+
+                    break;
+                default:
+                    tent--;
             }
-            else{
-                out.writeBytes(""+ parola + '\n');
-            }
-            if(!parola.equals("0")){
-                System.out.println("Inserisci stringa");
-                parola = input.next();
-                out.writeBytes("" + parola +'\n');
-                String stringaRicevuta = in.readLine();
-                System.out.println("la string ricevuta e' " + stringaRicevuta);
-            }
-            else{
-                System.out.println("Connessione chiusa");
-                connessione = false;
-            }
-            
         }
-        
+
         s.close();
     }
 }
